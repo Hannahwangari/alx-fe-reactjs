@@ -1,12 +1,12 @@
-import './App.css'
+import WelcomeMessage from './components/WelcomeMessage';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <h1>Hello ALX!</h1>
-      <p>Welcome to your first custom React component 🚀</p>
+      <WelcomeMessage />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
