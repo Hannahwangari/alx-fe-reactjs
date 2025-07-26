@@ -1,4 +1,4 @@
-// src/useRecipeStore.js
+// src/stores/recipeStore.js
 import { create } from 'zustand';
 
 const useRecipeStore = create((set) => ({
@@ -10,7 +10,7 @@ const useRecipeStore = create((set) => ({
       recipes: [...state.recipes, newRecipe],
     })),
 
-  // initialize the recipe list
+  // Set initial recipe list
   setRecipes: (recipes) => set({ recipes }),
 }));
 

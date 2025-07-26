@@ -1,29 +1,16 @@
 // src/App.jsx
-import React from "react";
-import AddRecipeForm from "./Components/AddRecipeForm";
-import RecipeList from "./Components/RecipeList";
+import React from 'react';
+import AddRecipeForm from './components/AddRecipeForm';
+import RecipeList from './components/RecipeList';
 
-function App() {
+const App = () => {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>🍽️ My Recipe Book</h1>
+    <div style={{ padding: '2rem' }}>
+      <h1>My Recipe App</h1>
       <AddRecipeForm />
       <RecipeList />
     </div>
   );
-}
-
-const styles = {
-  container: {
-    padding: "2rem",
-    fontFamily: "Arial, sans-serif",
-    maxWidth: "600px",
-    margin: "auto",
-  },
-  title: {
-    textAlign: "center",
-    color: "#4caf50",
-  },
 };
 
 export default App;
