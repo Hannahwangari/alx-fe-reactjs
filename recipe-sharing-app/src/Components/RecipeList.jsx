@@ -1,6 +1,6 @@
 // src/components/RecipeList.jsx
 import React from 'react';
-import useRecipeStore from '../stores/recipeStore';
+import useRecipeStore from '../stores/RecipeStore';
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
@@ -9,14 +9,15 @@ const RecipeList = () => {
     <div>
       <h2>Recipe List</h2>
       {recipes.length === 0 ? (
-        <p>No recipes added yet.</p>
+        <p>No recipes available. Please add one!</p>
       ) : (
-        recipes.map((recipe) => (
-          <div key={recipe.id} style={{ marginBottom: '1rem' }}>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-          </div>
-        ))
+        <ul>
+          {recipes.map((recipe) => (
+            <li key={recipe.id}>
+              <strong>{recipe.title}</strong> - {recipe.description}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
