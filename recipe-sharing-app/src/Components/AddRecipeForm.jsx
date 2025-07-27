@@ -1,6 +1,6 @@
+// src/components/AddRecipeForm.jsx
 import { useState } from 'react';
-import useRecipeStore from '../stores/RecipeStore'; // ✅ Uppercase matches your actual file
-
+import useRecipeStore from '../stores/RecipeStore'; // ✅ Adjust this if needed
 
 const AddRecipeForm = () => {
   const addRecipe = useRecipeStore((state) => state.addRecipe);
