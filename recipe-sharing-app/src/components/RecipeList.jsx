@@ -1,35 +1,23 @@
-// src/components/EditRecipeForm.jsx
-import React, { useState } from 'react';
+// src/components/RecipeList.jsx
+import React from 'react';
 import useRecipeStore from '../store/recipeStore';
+import { Link } from 'react-router-dom';
 
-const EditRecipeForm = ({ recipe, onClose }) => {
-  const [title, setTitle] = useState(recipe.title);
-  const [description, setDescription] = useState(recipe.description);
-  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); // ✅ Important for validation
-    updateRecipe({ id: recipe.id, title, description });
-    onClose(); // Close form after update
-  };
+const RecipeList = () => {
+  const { filteredRecipes } = useRecipeStore((state) => ({
+    filteredRecipes: state.filteredRecipes,
+  }));
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      />
-      <button type="submit">Save</button>
-      <button type="button" onClick={onClose}>Cancel</button>
-    </form>
+    <div>
+      {filteredRecipes.map((recipe) => (
+        <div key={recipe.id} style={{ marginBottom: '15px' }}>
+          <h3>{recipe.title}</h3>
+          <Link to={`/recipes/${recipe.id}`}>View Details</Link>
+        </div>
+      ))}
+    </div>
   );
 };
 
-export default EditRecipeForm;
+export default RecipeList;

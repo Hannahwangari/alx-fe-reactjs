@@ -1,20 +1,16 @@
-// src/App.jsx
+// src/App.jsx or src/pages/Home.jsx depending on your structure
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import RecipeDetails from './components/RecipeDetails';
-import EditRecipeForm from './components/EditRecipeForm';
+import SearchBar from './components/SearchBar';
+import RecipeList from './components/RecipeList';
 
-const App = () => {
+function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="/edit/:id" element={<EditRecipeForm />} />
-      </Routes>
-    </Router>
+    <div style={{ padding: '30px', maxWidth: '600px', margin: '0 auto' }}>
+      <h1>Recipe Sharing App</h1>
+      <SearchBar />
+      <RecipeList />
+    </div>
   );
-};
+}
 
 export default App;
