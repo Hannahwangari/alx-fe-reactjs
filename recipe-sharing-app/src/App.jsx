@@ -1,28 +1,20 @@
 // src/App.jsx
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import AddRecipeForm from './components/AddRecipeForm';
-import RecipeList from './components/RecipeList';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import RecipeDetails from './components/RecipeDetails';
 import EditRecipeForm from './components/EditRecipeForm';
 
-function App() {
+const App = () => {
   return (
-    <div style={{ padding: '1rem' }}>
-      <h1>Recipe Sharing App</h1>
-
-      {/* Navigation */}
-      <nav style={{ marginBottom: '1rem' }}>
-        <Link to="/">Home</Link> | <Link to="/add">Add Recipe</Link>
-      </nav>
-
-      {/* Define Routes */}
+    <Router>
       <Routes>
-        <Route path="/" element={<RecipeList />} />
-        <Route path="/add" element={<AddRecipeForm />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/edit/:id" element={<EditRecipeForm />} />
       </Routes>
-    </div>
+    </Router>
   );
-}
+};
 
 export default App;
