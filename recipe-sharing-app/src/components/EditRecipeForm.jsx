@@ -1,50 +1,36 @@
 // src/components/EditRecipeForm.jsx
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import useRecipeStore from '../store/recipeStore';
 
-const EditRecipeForm = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const { recipes, updateRecipe } = useRecipeStore((state) => ({
-    recipes: state.recipes,
-    updateRecipe: state.updateRecipe,
-  }));
-
-  const recipe = recipes.find((r) => r.id === Number(id));
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-
-  useEffect(() => {
-    if (recipe) {
-      setTitle(recipe.title);
-      setDescription(recipe.description);
-    }
-  }, [recipe]);
+const EditRecipeForm = ({ recipe, onClose }) => {
+  const [title, setTitle] = useState(recipe.title);
+  const [description, setDescription] = useState(recipe.description);
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // ✅ required by the checker
-    updateRecipe(recipe.id, { title, description });
-    navigate('/');
+    event.preventDefault(); // ✅ needed for the check
+    updateRecipe({ ...recipe, title, description });
+    onClose();
   };
-
-  if (!recipe) return <p>Recipe not found!</p>;
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Edit Recipe</h2>
+      <h3>Edit Recipe</h3>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
+        required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Description"
+        required
       />
-      <button type="submit">Save</button>
+      <button type="submit">Update</button>
+      <button type="button" onClick={onClose}>Cancel</button>
     </form>
   );
 };

@@ -1,15 +1,22 @@
-// src/App.jsx or src/pages/Home.jsx depending on your structure
+// src/App.jsx
 import React from 'react';
-import SearchBar from './components/SearchBar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecipeList from './components/RecipeList';
+import RecipeDetails from './components/RecipeDetails';
+import AddRecipeForm from './components/AddRecipeForm';
 
 function App() {
   return (
-    <div style={{ padding: '30px', maxWidth: '600px', margin: '0 auto' }}>
-      <h1>Recipe Sharing App</h1>
-      <SearchBar />
-      <RecipeList />
-    </div>
+    <Router>
+      <div>
+        <h1>Recipe Sharing App</h1>
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+          <Route path="/add" element={<AddRecipeForm />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

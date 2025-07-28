@@ -1,7 +1,7 @@
 // src/components/RecipeList.jsx
 import React from 'react';
-import useRecipeStore from '../store/recipeStore';
 import { Link } from 'react-router-dom';
+import useRecipeStore from '../store/recipeStore';
 
 const RecipeList = () => {
   const { filteredRecipes } = useRecipeStore((state) => ({
@@ -10,12 +10,14 @@ const RecipeList = () => {
 
   return (
     <div>
-      {filteredRecipes.map((recipe) => (
-        <div key={recipe.id} style={{ marginBottom: '15px' }}>
-          <h3>{recipe.title}</h3>
-          <Link to={`/recipes/${recipe.id}`}>View Details</Link>
-        </div>
-      ))}
+      <h2>All Recipes</h2>
+      <ul>
+        {filteredRecipes.map((recipe) => (
+          <li key={recipe.id}>
+            <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
