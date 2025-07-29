@@ -1,30 +1,21 @@
-import React, { useEffect } from 'react';
-import useRecipeStore from '../store/recipeStore';
+import React from 'react';
+import useRecipeStore from './recipeStore';
 
-function FavoritesList() {
-  const favorites = useRecipeStore((state) => state.favorites);
+function FavouritesList() {
   const recipes = useRecipeStore((state) => state.recipes);
-  const removeFavorite = useRecipeStore((state) => state.removeFavorite);
-  const generateRecommendations = useRecipeStore((state) => state.generateRecommendations);
+  const favorites = useRecipeStore((state) => state.favorites);
 
-  useEffect(() => {
-    generateRecommendations();
-  }, [favorites, generateRecommendations]);
-
-  const favoriteRecipes = recipes.filter((recipe) => favorites.includes(recipe.id));
+  const favoriteRecipes = recipes.filter((r) => favorites.includes(r.id));
 
   return (
     <div>
-      <h2>Favorites</h2>
+      <h2>My Favorites</h2>
       {favoriteRecipes.length === 0 ? (
         <p>No favorites yet.</p>
       ) : (
         <ul>
           {favoriteRecipes.map((recipe) => (
-            <li key={recipe.id}>
-              {recipe.title}
-              <button onClick={() => removeFavorite(recipe.id)}>❌ Remove</button>
-            </li>
+            <li key={recipe.id}>{recipe.title}</li>
           ))}
         </ul>
       )}
@@ -32,4 +23,4 @@ function FavoritesList() {
   );
 }
 
-export default FavoritesList;
+export default FavouritesList;

@@ -1,35 +1,42 @@
-// src/store/recipeStore.js
 import { create } from 'zustand';
 
 const useRecipeStore = create((set, get) => ({
-  recipes: [],
+  recipes: [
+    { id: 1, title: 'Spaghetti Bolognese', description: 'Hearty meat sauce with pasta.' },
+    { id: 2, title: 'Vegetarian Chili', description: 'Spicy and satisfying.' },
+    { id: 3, title: 'Lemon Chicken', description: 'Bright and zesty.' },
+    { id: 4, title: 'Beef Stir Fry', description: 'Quick and easy Asian style dish.' },
+  ],
+  searchTerm: '',
   favorites: [],
   recommendations: [],
 
-  setRecipes: () => {
-    const dummyRecipes = [
-      { id: 1, title: 'Spaghetti Bolognese', description: 'Classic Italian pasta.' },
-      { id: 2, title: 'Chicken Curry', description: 'Spicy and flavorful.' },
-      { id: 3, title: 'Avocado Toast', description: 'Healthy and quick breakfast.' },
-    ];
-    set({ recipes: dummyRecipes });
+  setSearchTerm: (term) => set({ searchTerm: term }),
+
+  filteredRecipes: () => {
+    const { recipes, searchTerm } = get();
+    if (!searchTerm) return recipes;
+    return recipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   },
 
-  addFavorite: (id) => {
-    const { favorites } = get();
-    if (!favorites.includes(id)) {
-      set({ favorites: [...favorites, id] });
-    }
-  },
+  addFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: [...new Set([...state.favorites, recipeId])],
+    })),
 
-  removeFavorite: (id) => {
-    const { favorites } = get();
-    set({ favorites: favorites.filter((favId) => favId !== id) });
-  },
+  removeFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: state.favorites.filter((id) => id !== recipeId),
+    })),
 
   generateRecommendations: () => {
     const { recipes, favorites } = get();
-    const recommended = recipes.filter((r) => !favorites.includes(r.id)).slice(0, 2);
+    const recommended = recipes.filter(
+      (recipe) =>
+        !favorites.includes(recipe.id) && Math.random() > 0.5
+    );
     set({ recommendations: recommended });
   },
 }));
