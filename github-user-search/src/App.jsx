@@ -1,10 +1,11 @@
 import React from 'react';
+import SearchForm from './components/SearchForm'; // adjust path as needed
 
 function App() {
   return (
-    <div className="p-4 text-center">
-      <h1 className="text-2xl font-bold mb-4">GitHub User Search App</h1>
-      <p>Start typing a GitHub username to search for profiles...</p>
+    <div>
+      <h1>GitHub User Finder</h1>
+      <SearchForm />
     </div>
   );
 }
