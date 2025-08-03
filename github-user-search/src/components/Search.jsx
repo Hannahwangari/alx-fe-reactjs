@@ -1,32 +1,29 @@
 import React, { useState } from 'react';
+import { fetchUserData } from '../api'; // ✅ import the helper function
 
 function Search() {
   const [username, setUsername] = useState('');
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+const handleSearch = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(false);
+  setUser(null);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(false);
-    setUser(null);
+  try {
+    const data = await fetchUserData(username); // ✅ use your helper
+    setUser(data);
+  } catch (err) {
+    console.error(err);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
 
-    try {
-      const response = await fetch(`https://api.github.com/users/${username}`);
-      if (!response.ok) {
-        setError(true);
-        setUser(null);
-      } else {
-        const data = await response.json();
-        setUser(data);
-        setError(false);
-      }
-    
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   return (
     <div>
@@ -41,7 +38,7 @@ function Search() {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p>Looks like we cant find the user</p>}
+      {error && <p>Looks like we can't find the user</p>}
       {user && (
         <div>
           <img src={user.avatar_url} alt={user.login} width="100" />
