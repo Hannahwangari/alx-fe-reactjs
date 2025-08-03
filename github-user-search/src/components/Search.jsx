@@ -1,18 +1,17 @@
+// File: src/components/Search.jsx
 import React, { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
 function Search() {
   const [username, setUsername] = useState('');
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const handleSearch = async () => {
     setLoading(true);
     setError(false);
     setUser(null);
-
     try {
       const data = await fetchUserData(username);
       setUser(data);
@@ -25,24 +24,23 @@ function Search() {
 
   return (
     <div>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username"
-        />
-        <button type="submit">Search</button>
-      </form>
+      <h2>GitHub User Search</h2>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter GitHub username"
+      />
+      <button onClick={handleSearch}>Search</button>
 
       {loading && <p>Loading...</p>}
-      {error && <p>Looks like we cant find the user.</p>}
+      {error && <p>Looks like we can't find the user</p>}
       {user && (
         <div>
           <img src={user.avatar_url} alt={user.login} width="100" />
-          <h2>{user.name || user.login}</h2>
+          <p>{user.name || user.login}</p>
           <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-            View Profile
+            View GitHub Profile
           </a>
         </div>
       )}
