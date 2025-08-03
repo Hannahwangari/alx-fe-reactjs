@@ -13,10 +13,22 @@ function Search() {
     const fetchUsers = async () => {
       setLoading(true);
       try {
+        // Step 1: Get basic user list
         const response = await axios.get(
-          `https://api.github.com/search/users?q=${query}&page=${page}&per_page=10`
+          `https://api.github.com/search/users?q=${query}&page=${page}&per_page=5`
         );
-        setResults(response.data.items);
+
+        const basicUsers = response.data.items;
+
+        // Step 2: Fetch detailed profile for each user
+        const detailedUsers = await Promise.all(
+          basicUsers.map(async (user) => {
+            const userDetails = await axios.get(user.url); // user.url is the detail endpoint
+            return userDetails.data;
+          })
+        );
+
+        setResults(detailedUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       } finally {
@@ -28,7 +40,7 @@ function Search() {
   }, [query, page]);
 
   const handleSearch = () => {
-    setPage(1); // Reset to page 1 on new search
+    setPage(1);
   };
 
   return (
@@ -62,6 +74,9 @@ function Search() {
               />
               <div>
                 <p className="font-semibold">{user.login}</p>
+                <p className="text-sm text-gray-600">
+                  Location: {user.location || "Not available"}
+                </p>
                 <a
                   href={user.html_url}
                   target="_blank"
