@@ -1,0 +1,9 @@
+/* index.css */
+
+/* Import all Tailwind layers (Preflight, Components, Utilities) */
+@import "tailwindcss";
+
+/* Optional: Your custom styles below */
+body {
+  font-family: sans-serif;
+}
