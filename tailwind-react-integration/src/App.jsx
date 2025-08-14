@@ -1,13 +1,9 @@
-import React from "react";
-import "./index.css";
-import UserProfile from "./components/UserProfile";
-
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-500">
-      <UserProfile />
+    <div className="min-h-screen flex items-center justify-center">
+      <h1 className="text-3xl font-bold underline text-blue-600">
+        Hello Tailwind v4 🎉
+      </h1>
     </div>
-  );
+  )
 }
-
-export default App;
