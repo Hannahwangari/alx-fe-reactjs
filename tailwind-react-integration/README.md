@@ -1,4 +1,4 @@
-^x
+
 # Tailwind React Integration
 
 This project is part of the ALX Frontend React curriculum.
