@@ -1,9 +1,9 @@
 import React from 'react';
-import Homepage from './components/Homepage';
+import HomePage from './components/HomePage';
 import './index.css';
 
 function App() {
-  return <Homepage />;
+  return <HomePage />;
 }
 
 export default App;
