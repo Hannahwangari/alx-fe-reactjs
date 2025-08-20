@@ -1,7 +1,9 @@
-import HomePage from "./components/Homepage";
+import React from 'react';
+import Homepage from './components/Homepage';
+import './index.css';
 
 function App() {
-  return <HomePage />;
+  return <Homepage />;
 }
 
 export default App;
