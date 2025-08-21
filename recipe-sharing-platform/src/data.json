@@ -3,15 +3,28 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg"
+    "image": "https://www.simplyrecipes.com/thmb/_x0nKJbUn7ZC1Jf9F2Sr9iCVfLQ=/2000x1333/filters:fill(auto,1)/Simply-Recipes-Spaghetti-Carbonara-LEAD-07-95c181f76e634bcdb9b8dfe7e84e0fd2.jpg",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta or bacon",
+      "2 eggs",
+      "50g Parmesan cheese",
+      "Black pepper"
+    ],
+    "instructions": "Cook pasta. Fry pancetta. Beat eggs with cheese. Combine all with pasta and pepper."
   },
   {
     "id": 2,
-    "title": "Chicken Tikka in Smooth Buttery Tomato Cream",
-    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth, buttery tomato cream sauce.",
-    "image": "https://images.pexels.com/photos/5410405/pexels-photo-5410405.jpeg?auto=compress&cs=tinysrgb&w=800"
+    "title": "Chicken Tikka",
+    "summary": "A flavorful Indian dish with marinated chicken cooked to perfection.",
+    "image": "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/chicken-tikka-recipe.jpg",
+    "ingredients": [
+      "500g chicken breast",
+      "150g yogurt",
+      "2 tbsp tikka masala spice mix",
+      "1 tbsp lemon juice",
+      "Salt to taste"
+    ],
+    "instructions": "Marinate chicken with spices, yogurt, and lemon. Grill or bake until cooked through."
   }
-  
-    
-  
 ]
