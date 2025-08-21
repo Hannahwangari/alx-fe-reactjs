@@ -1,17 +1,26 @@
-import React from "react";
-import recipes from "../data.json";
+import React, { useState, useEffect } from "react";
 
-const HomePage = () => {
+function HomePage() {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    // Fetch the local JSON file
+    fetch("/src/data.json")
+      .then((response) => response.json())
+      .then((data) => setRecipes(data))
+      .catch((error) => console.error("Error loading data:", error));
+  }, []);
+
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-center mb-6">Recipe Sharing Platform</h1>
-      
-      {/* Responsive grid */}
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold text-center mb-8">Recipe List</h1>
+
+      {/* Responsive grid with md breakpoint */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {recipes.map((recipe) => (
           <div
             key={recipe.id}
-            className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300"
+            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
             <img
               src={recipe.image}
@@ -27,6 +36,6 @@ const HomePage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default HomePage;

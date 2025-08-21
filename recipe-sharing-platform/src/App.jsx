@@ -1,5 +1,5 @@
 import React from "react";
-import HomePage from "./components/HomPage";
+import HomePage from "./components/HomePage"; // ✅ fixed spelling
 import "./index.css";
 
 function App() {
