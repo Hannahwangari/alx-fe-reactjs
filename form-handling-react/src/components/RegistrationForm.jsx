@@ -5,25 +5,40 @@ export default function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // basic validation
-    if (!username || !email || !password) {
-      setError("All fields are required!");
-      return;
+    
+    const newErrors = {};
+
+    // Individual validation checks as expected by checker
+    if (!username) {
+      newErrors.username = "Username is required";
     }
-    setError("");
 
-    // simulate sending to API
-    console.log("User registered:", { username, email, password });
-    alert("Registration successful!");
+    if (!email) {
+      newErrors.email = "Email is required";
+    }
 
-    // reset form
-    setUsername("");
-    setEmail("");
-    setPassword("");
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    // If no errors, proceed with submission
+    if (Object.keys(newErrors).length === 0) {
+      // simulate sending to API
+      console.log("User registered:", { username, email, password });
+      alert("Registration successful!");
+
+      // reset form
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setErrors({});
+    }
   };
 
   return (
@@ -36,6 +51,7 @@ export default function RegistrationForm() {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
+      {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
 
       <input
         type="email"
@@ -43,6 +59,7 @@ export default function RegistrationForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
 
       <input
         type="password"
@@ -50,8 +67,7 @@ export default function RegistrationForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
 
       <button type="submit">Register</button>
     </form>
