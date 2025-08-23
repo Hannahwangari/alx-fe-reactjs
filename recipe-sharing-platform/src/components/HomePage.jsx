@@ -15,6 +15,7 @@ function HomePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">Recipe Sharing Platform</h1>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {recipes.map(recipe => (
           <Link 
@@ -33,6 +34,16 @@ function HomePage() {
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* Add Recipe button placed OUTSIDE the loop */}
+      <div className="flex justify-center mt-8">
+        <Link 
+          to="/add" 
+          className="bg-green-500 text-white px-6 py-3 rounded-lg shadow hover:bg-green-600 transition"
+        >
+          ➕ Add Recipe
+        </Link>
       </div>
     </div>
   );
