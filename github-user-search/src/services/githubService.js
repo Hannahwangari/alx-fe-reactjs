@@ -1,20 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const fetchUsersAdvanced = async ({ username, location, minRepos }) => {
-  let query = '';
-
-  if (username) query += `${username}`;
-  if (location) query += `+location:${location}`;
-  if (minRepos) query += `+repos:>${minRepos}`;
-
-  const url = `https://api.github.com/search/users?q=${query}`;
-
+/**
+ * Fetch GitHub user data by username
+ * @param {string} username - GitHub username
+ * @returns {Promise<Object>} - GitHub user data
+ */
+export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(url);
-    return response.data.items; // ✅ array of users
+    const response = await axios.get(`https://api.github.com/users/${username}`);
+    return response.data; // ✅ return user data
   } catch (error) {
-    console.error('Error fetching advanced users:', error);
-    throw error;
+    console.error("Error fetching GitHub user data:", error);
+    throw error; // re-throw so component can handle it
   }
 };
-
