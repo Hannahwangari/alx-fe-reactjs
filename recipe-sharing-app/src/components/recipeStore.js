@@ -1,25 +1,21 @@
 import { create } from 'zustand';
 
 const useRecipeStore = create((set, get) => ({
+  // Initial recipes
   recipes: [
     { id: 1, title: 'Spaghetti Bolognese', description: 'Hearty meat sauce with pasta.' },
     { id: 2, title: 'Vegetarian Chili', description: 'Spicy and satisfying.' },
     { id: 3, title: 'Lemon Chicken', description: 'Bright and zesty.' },
     { id: 4, title: 'Beef Stir Fry', description: 'Quick and easy Asian style dish.' },
   ],
+
+  // States
   searchTerm: '',
   favorites: [],
   recommendations: [],
 
+  // Actions
   setSearchTerm: (term) => set({ searchTerm: term }),
-
-  filteredRecipes: () => {
-    const { recipes, searchTerm } = get();
-    if (!searchTerm) return recipes;
-    return recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  },
 
   addFavorite: (recipeId) =>
     set((state) => ({
@@ -34,10 +30,18 @@ const useRecipeStore = create((set, get) => ({
   generateRecommendations: () => {
     const { recipes, favorites } = get();
     const recommended = recipes.filter(
-      (recipe) =>
-        !favorites.includes(recipe.id) && Math.random() > 0.5
+      (recipe) => !favorites.includes(recipe.id) && Math.random() > 0.5
     );
     set({ recommendations: recommended });
+  },
+
+  // Derived getter for filtered recipes
+  get filteredRecipes() {
+    const { recipes, searchTerm } = get();
+    if (!searchTerm.trim()) return recipes;
+    return recipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   },
 }));
 
