@@ -9,11 +9,16 @@ const TodoList = ({ todos, toggleTodo, deleteTodo }) => {
           onClick={() => toggleTodo(todo.id)}
           style={{
             textDecoration: todo.completed ? "line-through" : "none",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           {todo.text}
-          <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteTodo(todo.id);
+            }}
+          >
             Delete
           </button>
         </li>

@@ -1,48 +1,25 @@
 import React, { useState } from "react";
-import TodoList from "./TodoList";
-import AddTodoForm from "./AddTodoForm";
 
-const App = () => {
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build a Todo App", completed: false },
-  ]);
+const AddTodoForm = ({ addTodo }) => {
+  const [value, setValue] = useState("");
 
-  // Add a new todo
-  const addTodo = (text) => {
-    const todo = {
-      id: Date.now(),
-      text,
-      completed: false,
-    };
-    setTodos([...todos, todo]);
-  };
-
-  // Toggle completion
-  const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  // Delete a todo
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!value.trim()) return;
+    addTodo(value);
+    setValue("");
   };
 
   return (
-    <div>
-      <h1>Todo App</h1>
-      <AddTodoForm addTodo={addTodo} />
-      <TodoList
-        todos={todos}
-        toggleTodo={toggleTodo}
-        deleteTodo={deleteTodo}
+    <form onSubmit={handleSubmit}>
+      <input
+        placeholder="Add a new todo"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
-    </div>
+      <button type="submit">Add</button>
+    </form>
   );
 };
 
-export default App;
+export default AddTodoForm;

@@ -1,29 +1,17 @@
 import React, { useState } from "react";
-import TodoList from "./TodoList";
+import TodoList from "./components/TodoList";
+import AddTodoForm from "./components/AddTodoForm";
 
-const App = () => {
+function App() {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build a Todo App", completed: false },
+    { id: 2, text: "Write Tests", completed: true },
   ]);
 
-  const [newTodo, setNewTodo] = useState("");
-
-  // Add a new todo
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (!newTodo.trim()) return;
-
-    const todo = {
-      id: Date.now(),
-      text: newTodo,
-      completed: false,
-    };
-    setTodos([...todos, todo]);
-    setNewTodo("");
+  const addTodo = (text) => {
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
-  // Toggle completion
   const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -32,7 +20,6 @@ const App = () => {
     );
   };
 
-  // Delete a todo
   const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -40,22 +27,10 @@ const App = () => {
   return (
     <div>
       <h1>Todo App</h1>
-      <form onSubmit={addTodo}>
-        <input
-          type="text"
-          placeholder="Add a new todo"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
-      <TodoList
-        todos={todos}
-        toggleTodo={toggleTodo}
-        deleteTodo={deleteTodo}
-      />
+      <AddTodoForm addTodo={addTodo} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
     </div>
   );
-};
+}
 
 export default App;
