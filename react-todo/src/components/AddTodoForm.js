@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TodoList from "./TodoList";
+import AddTodoForm from "./AddTodoForm";
 
 const App = () => {
   const [todos, setTodos] = useState([
@@ -7,20 +8,14 @@ const App = () => {
     { id: 2, text: "Build a Todo App", completed: false },
   ]);
 
-  const [newTodo, setNewTodo] = useState("");
-
   // Add a new todo
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (!newTodo.trim()) return;
-
+  const addTodo = (text) => {
     const todo = {
       id: Date.now(),
-      text: newTodo,
+      text,
       completed: false,
     };
     setTodos([...todos, todo]);
-    setNewTodo("");
   };
 
   // Toggle completion
@@ -40,15 +35,7 @@ const App = () => {
   return (
     <div>
       <h1>Todo App</h1>
-      <form onSubmit={addTodo}>
-        <input
-          type="text"
-          placeholder="Add a new todo"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
+      <AddTodoForm addTodo={addTodo} />
       <TodoList
         todos={todos}
         toggleTodo={toggleTodo}
