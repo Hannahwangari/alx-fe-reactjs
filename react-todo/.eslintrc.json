@@ -1,9 +1,20 @@
 {
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
   "env": {
     "browser": true,
-    "es2021": true,
+    "es6": true,
+    "node": true,
     "jest": true
   },
-  "extends": ["react-app", "react-app/jest"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {}
 }
