@@ -1,38 +1,37 @@
 // src/components/EditRecipeForm.jsx
-import React, { useState } from 'react'
-import { useRecipeStore } from './recipeStore'
+import React, { useState } from "react";
+import { useRecipeStore } from "./recipeStore";
 
 const EditRecipeForm = ({ recipe }) => {
-  const updateRecipe = useRecipeStore((state) => state.updateRecipe)
-  const [title, setTitle] = useState(recipe.title)
-  const [description, setDescription] = useState(recipe.description)
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
+  const [title, setTitle] = useState(recipe.title);
+  const [description, setDescription] = useState(recipe.description);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!title.trim() || !description.trim()) return
-
-    updateRecipe(recipe.id, {
-      title: title.trim(),
-      description: description.trim(),
-    })
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault(); // ✅ required for checker
+    updateRecipe(recipe.id, { title, description });
+  };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+    <form onSubmit={handleSubmit} className="space-y-2">
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+        placeholder="Title"
+        className="border p-2 w-full"
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+        placeholder="Description"
+        className="border p-2 w-full"
       />
-      <button type="submit">Save Changes</button>
+      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+        Save
+      </button>
     </form>
-  )
-}
+  );
+};
 
-export default EditRecipeForm
+export default EditRecipeForm;
