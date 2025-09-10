@@ -1,26 +1,24 @@
 // src/components/RecipeList.jsx
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useRecipeStore } from './recipeStore'
+import React from "react";
+import { useRecipeStore } from "./recipeStore";
 
 const RecipeList = () => {
-  const recipes = useRecipeStore((state) => state.recipes)
+  const recipes = useRecipeStore((state) => state.filteredRecipes);
 
   if (recipes.length === 0) {
-    return <p>No recipes yet. Add one above!</p>
+    return <p>No recipes match your search.</p>;
   }
 
   return (
     <div>
       {recipes.map((recipe) => (
-        <div key={recipe.id} style={{ marginBottom: '15px' }}>
+        <div key={recipe.id} style={{ marginBottom: "20px" }}>
           <h3>{recipe.title}</h3>
           <p>{recipe.description}</p>
-          <Link to={`/recipe/${recipe.id}`}>View Details</Link>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default RecipeList
+export default RecipeList;
