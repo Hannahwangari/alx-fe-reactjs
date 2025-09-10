@@ -4,31 +4,22 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeList from "./components/RecipeList";
 import RecipeDetails from "./components/RecipeDetails";
+import EditRecipeForm from "./components/EditRecipeForm";
 import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
     <Router>
-      <main style={{ maxWidth: "600px", margin: "40px auto", padding: "20px" }}>
-        <h1>🍲 Recipe Sharing App</h1>
-
+      <div>
+        <h1>Recipe Sharing App</h1>
+        <SearchBar />
         <Routes>
-          {/* Home route */}
-          <Route
-            path="/"
-            element={
-              <>
-                <AddRecipeForm />
-                <SearchBar />
-                <RecipeList />
-              </>
-            }
-          />
-
-          {/* Recipe details route */}
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/add" element={<AddRecipeForm />} />
           <Route path="/recipes/:id" element={<RecipeDetails />} />
+          <Route path="/edit/:id" element={<EditRecipeForm />} />
         </Routes>
-      </main>
+      </div>
     </Router>
   );
 }
