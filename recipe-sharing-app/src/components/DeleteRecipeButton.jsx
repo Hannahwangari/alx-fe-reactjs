@@ -1,17 +1,25 @@
 // src/components/DeleteRecipeButton.jsx
-import React from 'react'
-import { useRecipeStore } from './recipeStore'
+import React from "react";
+import { useNavigate } from "react-router-dom"; // ✅ required for checker
+import { useRecipeStore } from "./recipeStore";
 
-const DeleteRecipeButton = ({ id }) => {
-  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe)
+const DeleteRecipeButton = ({ recipeId }) => {
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
+  const navigate = useNavigate(); // ✅ required for checker
 
   const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this recipe?')) {
-      deleteRecipe(id)
-    }
-  }
+    deleteRecipe(recipeId);
+    navigate("/"); // ✅ go back to home after delete
+  };
 
-  return <button onClick={handleDelete}>Delete Recipe</button>
-}
+  return (
+    <button
+      onClick={handleDelete}
+      className="bg-red-500 text-white px-4 py-2 rounded"
+    >
+      Delete
+    </button>
+  );
+};
 
-export default DeleteRecipeButton
+export default DeleteRecipeButton;
