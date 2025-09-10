@@ -1,33 +1,24 @@
-import React, { useEffect } from 'react';
-import useRecipeStore from '../store/recipeStore';
+// src/components/RecipeList.jsx
+import React from 'react'
+import { useRecipeStore } from '../store/recipeStore'  // ✅ fixed path
 
 const RecipeList = () => {
-  const setRecipes = useRecipeStore(state => state.setRecipes);
-  const filteredRecipes = useRecipeStore().filteredRecipes(); // <-- FIXED
+  const recipes = useRecipeStore((state) => state.recipes)
 
-  useEffect(() => {
-    setRecipes(); // setRecipes will populate recipes from store
-  }, [setRecipes]);
+  if (recipes.length === 0) {
+    return <p>No recipes yet. Add one above!</p>
+  }
 
   return (
     <div>
-      <h2>All Recipes</h2>
-      {filteredRecipes.length === 0 ? (
-        <p>No recipes found.</p>
-      ) : (
-        <ul>
-          {filteredRecipes.map(recipe => (
-            recipe?.title && (
-              <li key={recipe.id}>
-                <h3>{recipe.title}</h3>
-                <p>{recipe.description}</p>
-              </li>
-            )
-          ))}
-        </ul>
-      )}
+      {recipes.map((recipe) => (
+        <div key={recipe.id}>
+          <h3>{recipe.title}</h3>
+          <p>{recipe.description}</p>
+        </div>
+      ))}
     </div>
-  );
-};
+  )
+}
 
-export default RecipeList;
+export default RecipeList

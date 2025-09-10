@@ -1,16 +1,25 @@
 // src/App.jsx
-import React from "react";
-import AddRecipeForm from "./components/AddRecipeForm";
-import RecipeList from "./components/RecipeList";
+import React from 'react'
+import AddRecipeForm from './components/AddRecipeForm'
+import RecipeList from './components/RecipeList'
 
-const App = () => {
+function App() {
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">🍲 Recipe Sharing App</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
-  );
-};
+    <main style={{ maxWidth: '600px', margin: '40px auto', padding: '20px' }}>
+      <h1>🍲 Recipe Sharing App</h1>
 
-export default App;
+      {/* Form to add new recipes */}
+      <section style={{ marginTop: '20px' }}>
+        <AddRecipeForm />
+      </section>
+
+      {/* List of all recipes */}
+      <section style={{ marginTop: '30px' }}>
+        <h2>All Recipes</h2>
+        <RecipeList />
+      </section>
+    </main>
+  )
+}
+
+export default App
