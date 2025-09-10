@@ -1,6 +1,5 @@
-// src/components/RecipeList.jsx
 import React from 'react'
-import { useRecipeStore } from '../store/recipeStore'  // ✅ fixed path
+import { useRecipeStore } from './recipeStore'  // ✅ updated path
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes)

@@ -1,6 +1,5 @@
-// src/components/AddRecipeForm.jsx
 import React, { useState } from 'react'
-import { useRecipeStore } from '../store/recipeStore'  // ✅ fixed path
+import { useRecipeStore } from './recipeStore'  // ✅ updated path
 
 const AddRecipeForm = () => {
   const addRecipe = useRecipeStore((state) => state.addRecipe)
@@ -13,7 +12,7 @@ const AddRecipeForm = () => {
     if (!title.trim() || !description.trim()) return
 
     addRecipe({
-      id: Date.now(), // unique enough for demo
+      id: Date.now(),
       title: title.trim(),
       description: description.trim(),
     })
